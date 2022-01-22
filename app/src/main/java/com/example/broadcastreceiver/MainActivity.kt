@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 
 class MainActivity : AppCompatActivity() {
@@ -14,12 +15,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var battery = findViewById<AppCompatTextView>(R.id.batteryState)
+        val battery: TextView = findViewById(R.id.batteryState)
 
 
-        BatteryReceiver = BatteryReceiver(battery)
+        BatteryReceiver = BatteryReceiver(battery as AppCompatTextView)
+
 
         registerReceiver(BatteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+
+//        registerReceiver(BatteryReceiver, IntentFilter(Intent.ACTION_BATTERY_LOW))
+//
+//        registerReceiver(BatteryReceiver, IntentFilter(Intent.ACTION_BATTERY_OKAY))
 
     }
 
